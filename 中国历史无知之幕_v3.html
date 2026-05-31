@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+<title>历史的无知之幕 · 华夏卷</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@200;300;400;600;700&family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,600&display=swap');
+:root{
+  --bg:#f7f3ec;--surface:#fff;--border:rgba(0,0,0,.06);
+  --text:#2a2520;--dim:rgba(42,37,32,.45);--faint:rgba(42,37,32,.2);
+  --gold:#c4a35a;--jade:#3d8b7a;--red:#b33a2a;--accent:var(--gold);
+  --xianqin:#8b7355;--qinhan:#b8942e;--suitang:#c4482e;--songyuan:#5a8a5a;--mingqing:#3a6b7a;--modern:#3d8b7a;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Noto Serif SC','STSong','Songti SC','PingFang SC',Georgia,serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;line-height:1.8;font-weight:300}
+
+/* ═══ SCROLL PROGRESS ═══ */
+#progress{position:fixed;top:0;left:0;height:2px;background:var(--gold);z-index:1000;transition:width .1s}
+
+/* ═══ NAV ═══ */
+nav{position:fixed;top:1.5rem;right:1.5rem;z-index:100;display:flex;gap:1.5rem;font-size:.6rem;letter-spacing:.15em;color:var(--dim)}
+nav a{color:inherit;text-decoration:none;transition:color .3s;cursor:pointer}
+nav a:hover,nav a.active{color:var(--gold)}
+
+/* ═══ SECTIONS ═══ */
+.section{min-height:80vh;display:flex;flex-direction:column;justify-content:center;max-width:700px;margin:0 auto;padding:4rem 1.5rem;position:relative}
+.section-num{font-size:.5rem;letter-spacing:.4em;color:var(--faint);margin-bottom:2rem}
+.section h2{font-size:clamp(1.6rem,3.5vw,2.6rem);font-weight:300;letter-spacing:.08em;margin-bottom:1rem;line-height:1.3;font-family:'Noto Serif SC','STSong','Songti SC',serif}
+.section h3{font-size:1rem;font-weight:300;color:var(--dim);letter-spacing:.04em;margin-bottom:2rem;line-height:1.7;font-family:'Noto Serif SC','PingFang SC',sans-serif}
+.section p{font-size:.85rem;color:var(--dim);line-height:2;letter-spacing:.04em;margin-bottom:1rem}
+
+/* ═══ HERO ═══ */
+.hero{min-height:100vh;text-align:center}
+.hero h1{font-size:clamp(2.2rem,5vw,3.8rem);font-weight:200;letter-spacing:.15em;line-height:1.2;margin-bottom:1rem}
+.hero .tagline{font-size:.7rem;letter-spacing:.35em;color:var(--gold);margin-bottom:3rem}
+.hero .epigraph{font-size:.85rem;color:var(--dim);line-height:2.2;max-width:500px;margin:0 auto;letter-spacing:.06em;font-style:italic}
+.big-num{font-size:2rem;font-weight:300;color:var(--text);letter-spacing:.05em;display:block;margin:.5rem 0}
+.small-num{font-size:.6rem;color:var(--faint);letter-spacing:.15em}
+.scroll-hint{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);font-size:.55rem;color:var(--faint);letter-spacing:.2em;animation:bob 2s ease-in-out infinite}
+@keyframes bob{0%,100%{opacity:.3}50%{opacity:.8;transform:translateX(-50%) translateY(6px)}}
+
+/* ═══ FIGURE GRID ═══ */
+.figure-grid{display:flex;flex-wrap:wrap;gap:1px;max-width:600px;margin:2rem auto;background:rgba(0,0,0,.02);padding:1.5rem;border-radius:1px}
+.figure-dot{width:14px;height:16px;background:rgba(0,0,0,.04);transition:all .5s}
+.figure-dot.active{transform:scale(3);z-index:10;background:var(--gold)!important;box-shadow:0 0 16px rgba(196,163,90,.4)}
+.figure-dot.era-active{background:rgba(0,0,0,.12)}
+
+/* ═══ ERA TOGGLE ═══ */
+.toggle-row{display:flex;gap:.5rem;flex-wrap:wrap;margin:1.5rem 0;justify-content:center}
+.toggle-btn{padding:.4rem 1rem;background:transparent;border:1px solid var(--border);color:var(--dim);font-family:inherit;font-size:.55rem;letter-spacing:.15em;cursor:pointer;transition:all .3s;border-radius:100px}
+.toggle-btn:hover,.toggle-btn.active{background:var(--surface);color:var(--text);border-color:var(--dim)}
+
+/* ═══ TIMELINE MAP ═══ */
+.map-container{width:100%;height:420px;background:var(--surface);border:1px solid var(--border);position:relative;overflow:hidden;margin:2rem 0;border-radius:4px;box-shadow:0 2px 20px rgba(0,0,0,.04)}
+.map-container svg{width:100%;height:100%}
+.map-slider{width:100%;margin-top:.5rem}
+.map-slider input{width:100%;-webkit-appearance:none;height:2px;background:var(--border);outline:none}
+.map-slider input::-webkit-slider-thumb{-webkit-appearance:none;width:12px;height:12px;background:var(--gold);border-radius:50%;cursor:pointer}
+.map-label{text-align:center;font-size:.6rem;color:var(--dim);letter-spacing:.1em;margin-top:.5rem}
+.map-legend{display:flex;gap:1rem;justify-content:center;font-size:.45rem;color:var(--faint);letter-spacing:.1em;margin-top:.5rem}
+.map-legend span{display:flex;align-items:center;gap:.3rem}
+.map-legend .dot{width:6px;height:6px;border-radius:50%;display:inline-block}
+
+/* ═══ TEN LIVES ═══ */
+.lives-strip{display:flex;flex-direction:column;gap:1px;margin:2rem 0}
+.life-row{display:flex;align-items:center;padding:.8rem 1rem;background:var(--surface);transition:all .3s;cursor:default;gap:1rem}
+.life-row:hover{background:#1f1d19}
+.life-bar{height:3px;border-radius:1px;transition:width 1s ease}
+.life-pct{font-size:.6rem;color:var(--dim);min-width:40px;text-align:right;font-family:monospace}
+.life-desc{font-size:.7rem;color:var(--text);letter-spacing:.04em;flex:1}
+.life-era-tag{font-size:.45rem;color:var(--faint);letter-spacing:.15em;min-width:60px;text-align:right}
+
+/* ═══ CONDITION CARDS ═══ */
+.condition-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;margin:2rem 0}
+.cond-card{background:var(--surface);border:1px solid var(--border);padding:1.5rem;text-align:center;border-radius:2px}
+.cond-card .icon{font-size:1.5rem;margin-bottom:.5rem}
+.cond-card .label{font-size:.55rem;color:var(--faint);letter-spacing:.15em;margin-bottom:.3rem}
+.cond-card .value{font-size:1.2rem;font-weight:300;letter-spacing:.05em}
+.cond-card .note{font-size:.5rem;color:var(--faint);margin-top:.5rem}
+
+/* ═══ DRAW SECTION ═══ */
+.draw-section{text-align:center;padding:3rem 0}
+.draw-btn{display:inline-block;padding:1.2rem 3.5rem;background:var(--gold);color:var(--bg);border:none;font-family:inherit;font-size:.85rem;font-weight:500;letter-spacing:.2em;cursor:pointer;transition:all .4s;text-transform:uppercase}
+.draw-btn:hover{transform:scale(1.03);box-shadow:0 8px 30px rgba(196,163,90,.25)}
+.draw-btn:active{transform:scale(.96)}
+.draw-counter{font-size:.55rem;color:var(--faint);margin-top:1rem;letter-spacing:.15em}
+
+/* ═══ RESULT OVERLAY ═══ */
+.result-overlay{position:fixed;inset:0;background:rgba(16,15,13,.95);z-index:200;display:none;align-items:center;justify-content:center;padding:2rem}
+.result-overlay.show{display:flex}
+.result-card{background:var(--surface);border:1px solid var(--border);max-width:440px;width:100%;padding:3rem 2rem;text-align:center;animation:cardIn .6s ease}
+@keyframes cardIn{from{opacity:0;transform:scale(.95) translateY(20px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.result-card .era-badge{display:inline-block;padding:3px 12px;border:1px solid var(--border);font-size:.45rem;letter-spacing:.2em;margin-bottom:1.5rem;color:var(--faint)}
+.result-card .dynasty-name{font-size:1.8rem;font-weight:300;letter-spacing:.15em;margin-bottom:.3rem}
+.result-card .year-tag{font-size:.6rem;color:var(--dim);letter-spacing:.1em;margin-bottom:1.5rem}
+.result-card .identity-line{font-size:.8rem;line-height:2;letter-spacing:.05em;margin-bottom:1rem}
+.result-card .tag-row{display:flex;flex-wrap:wrap;justify-content:center;gap:.4rem;margin:1rem 0}
+.result-card .tag{font-size:.45rem;padding:2px 10px;border:1px solid var(--border);letter-spacing:.15em;color:var(--faint)}
+.result-card .sep{width:20px;height:1px;background:var(--border);margin:1.5rem auto}
+.result-card .judgment{font-size:.8rem;font-style:italic;line-height:2;color:var(--dim);letter-spacing:.04em}
+.result-close{position:absolute;top:1.5rem;right:1.5rem;background:none;border:none;color:var(--dim);font-size:1.2rem;cursor:pointer;font-family:inherit}
+.result-actions{display:flex;gap:1rem;justify-content:center;margin-top:1.5rem}
+.result-actions button{padding:.5rem 1.5rem;background:transparent;border:1px solid var(--border);color:var(--dim);font-family:inherit;font-size:.55rem;letter-spacing:.15em;cursor:pointer;transition:all .3s}
+.result-actions button:hover{background:var(--surface);color:var(--text)}
+
+/* ═══ METHOD ═══ */
+.method-note{background:var(--surface);border:1px solid var(--border);padding:2rem;font-size:.65rem;color:var(--dim);line-height:2;letter-spacing:.04em;border-radius:2px;margin:2rem 0}
+.method-note a{color:var(--gold);text-decoration:none}
+
+/* ═══ FOOTER ═══ */
+footer{text-align:center;padding:6rem 1rem 4rem;font-size:.5rem;color:var(--faint);letter-spacing:.2em}
+footer span{color:var(--gold)}
+
+@media(max-width:480px){
+  .section{padding:3rem 1rem;min-height:60vh}
+  .figure-grid{gap:1px;padding:1rem}
+  .figure-dot{width:11px;height:13px}
+  .life-row{gap:.5rem;padding:.6rem .8rem}
+  .life-desc{font-size:.65rem}
+  nav{gap:1rem;font-size:.5rem;right:1rem;top:1rem}
+}
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+
+<nav>
+<a href="#when">时代</a>
+<a href="#lives">命运</a>
+<a href="#map">山河</a>
+<a href="#condition">生存</a>
+<a href="#comfort">日常</a>
+<a href="#roles">阶层</a>
+<a href="#draw">抽取</a>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section class="section hero" id="hero">
+<div class="section-num">THE VEIL OF HISTORY · 华夏卷</div>
+<h1>历史的无知之幕</h1>
+<p class="tagline">如果你投胎在中国历史里</p>
+<p class="epigraph">
+忘记你是谁。<br>
+你是一张随机抽出的票——<br>
+从古往今来<span style="color:var(--gold)">每一个</span>在这片土地上活过的中国人之中。<br>
+<span class="big-num">370 亿</span>
+<span class="small-num">人是夏商以来出生在这片土地上的总人数 · 你是其中随机的一个</span>
+</p>
+<div class="scroll-hint">下 滑 揭 幕 ↓</div>
+</section>
+
+<!-- ═══ WHEN ═══ -->
+<section class="section" id="when">
+<div class="section-num">卷一</div>
+<h2>如果你投胎在中国历史里</h2>
+<h3>几乎可以肯定是遥远的过去。彩票有一个压倒性的偏向：越古老的时代，出生的人越多。</h3>
+<p>算法不按世纪均摊，而是按照每个时代的实际出生人数来加权。哪个时代的人多，你就更可能投胎到那个时代去。</p>
+
+<div class="toggle-row" id="eraToggle"></div>
+
+<div class="figure-grid" id="figureGrid"></div>
+
+<p style="text-align:center;font-size:.6rem;color:var(--faint)">每个格子 = 约3700万人。颜色越深 = 该时代出生人口越多。<br>切换上方按钮可看到不同时代的人口权重。</p>
+</section>
+
+<!-- ═══ TEN LIVES ═══ -->
+<section class="section" id="lives">
+<div class="section-num">卷二</div>
+<h2>最可能的十种命运</h2>
+<h3>如果抽一百次，你最可能活成这十种模样。帝王将相加在一起，填不满眼前任何一个格子。</h3>
+
+<div class="lives-strip" id="livesStrip"></div>
+</section>
+
+<!-- ═══ MAP ═══ -->
+<section class="section" id="map">
+<div class="section-num">卷三</div>
+<h2>在黄河流域的田埂上</h2>
+<h3>拖动时间轴，看人口重心如何在十二个时代里迁移。</h3>
+
+<div class="map-container">
+<svg viewBox="0 0 800 420" id="chinaMap">
+  <!-- Ocean background -->
+  <rect width="800" height="420" fill="#f0ede6"/>
+  <!-- China territory (main outline) -->
+  <path d="M180,100 L220,80 L340,60 L460,50 L560,55 L640,65 L700,90 L740,130 L750,180 L730,230 L700,280 L660,310 L620,340 L580,355 L500,370 L400,375 L320,360 L260,330 L200,290 L150,240 L130,180 L140,140 Z" fill="#e8e3d8" stroke="#c4b99a" stroke-width="1.5"/>
+  <!-- Neighboring regions -->
+  <path d="M0,0 L180,0 L180,100 L130,140 L140,180 L130,240 L100,280 L0,300 Z" fill="#f7f3ec" stroke="#ddd8cc" stroke-width="0.5"/>
+  <path d="M0,300 L100,280 L130,240 L100,180 L80,120 L0,100 Z" fill="#f7f3ec" stroke="#ddd8cc" stroke-width="0.5"/>
+  
+  <!-- Tibetan Plateau -->
+  <path d="M140,120 L180,100 L200,110 L220,140 L200,170 L170,190 L150,180 L140,150 Z" fill="#ebe6da" stroke="#d5cebb" stroke-width="0.8"/>
+  
+  <!-- Xinjiang -->
+  <path d="M60,40 L140,60 L180,80 L200,100 L180,100 L100,90 L60,75 Z" fill="#ebe6da" stroke="#d5cebb" stroke-width="0.8"/>
+  
+  <!-- Inner Mongolia -->
+  <path d="M200,80 L280,65 L400,50 L480,52 L460,70 L380,80 L280,90 L200,80 Z" fill="#ebe6da" stroke="#d5cebb" stroke-width="0.8"/>
+  
+  <!-- Northeast -->
+  <path d="M460,50 L560,55 L620,60 L640,70 L600,80 L520,85 L460,70 Z" fill="#ebe6da" stroke="#d5cebb" stroke-width="0.8"/>
+  
+  <!-- Yellow River -->
+  <path d="M200,160 Q280,140 380,165 Q450,180 520,170 Q580,160 640,180" fill="none" stroke="#c4a35a" stroke-width="2" opacity="0.6"/>
+  <text x="300" y="152" fill="#c4a35a" font-size="9" opacity="0.5" letter-spacing=".2em">黄河</text>
+  
+  <!-- Yangtze River -->
+  <path d="M180,240 Q280,220 400,235 Q520,250 650,240 Q700,235 720,250" fill="none" stroke="#3d8b7a" stroke-width="2" opacity="0.6"/>
+  <text x="340" y="228" fill="#3d8b7a" font-size="9" opacity="0.5" letter-spacing=".2em">长江</text>
+  
+  <!-- Great Wall hint -->
+  <path d="M200,110 L280,100 L380,110 L460,120 L540,130" fill="none" stroke="#8b7355" stroke-width="1" stroke-dasharray="4 6" opacity="0.4"/>
+  
+  <!-- Province borders (simplified) -->
+  <path d="M380,140 L400,180 L420,220" fill="none" stroke="#d5cebb" stroke-width="0.5"/>
+  <path d="M300,160 L340,200 L380,240" fill="none" stroke="#d5cebb" stroke-width="0.5"/>
+  <path d="M480,120 L500,160 L520,200" fill="none" stroke="#d5cebb" stroke-width="0.5"/>
+  <path d="M560,100 L580,150 L600,200" fill="none" stroke="#d5cebb" stroke-width="0.5"/>
+  <path d="M400,260 L450,280 L500,300" fill="none" stroke="#d5cebb" stroke-width="0.5"/>
+  <path d="M280,280 L340,300 L400,320" fill="none" stroke="#d5cebb" stroke-width="0.5"/>
+  
+  <!-- Population center dots -->
+  <circle cx="380" cy="165" r="8" fill="rgba(196,163,90,.25)" stroke="#c4a35a" stroke-width="1"/>
+  <text x="400" y="168" fill="#c4a35a" font-size="8" opacity="0.7">中原</text>
+  
+  <circle cx="340" cy="235" r="6" fill="rgba(61,139,122,.25)" stroke="#3d8b7a" stroke-width="1"/>
+  <text x="358" y="238" fill="#3d8b7a" font-size="8" opacity="0.7">江南</text>
+  
+  <circle cx="280" cy="200" r="5" fill="rgba(139,115,85,.2)" stroke="#8b7355" stroke-width="0.8"/>
+  <text x="250" y="198" fill="#8b7355" font-size="8" opacity="0.7">关中</text>
+  
+  <circle cx="500" cy="180" r="4" fill="rgba(139,115,85,.2)" stroke="#8b7355" stroke-width="0.8"/>
+  <text x="515" y="183" fill="#8b7355" font-size="8" opacity="0.7">齐鲁</text>
+  
+  <circle cx="460" cy="260" r="4" fill="rgba(61,139,122,.2)" stroke="#3d8b7a" stroke-width="0.8"/>
+  <text x="475" y="263" fill="#3d8b7a" font-size="8" opacity="0.7">荆楚</text>
+  
+  <circle cx="240" cy="270" r="4" fill="rgba(196,68,46,.15)" stroke="#c4482e" stroke-width="0.8"/>
+  <text x="210" y="268" fill="#c4482e" font-size="8" opacity="0.7">巴蜀</text>
+  
+  <circle cx="600" cy="250" r="3" fill="rgba(61,139,122,.15)" stroke="#3d8b7a" stroke-width="0.6"/>
+  <text x="612" y="253" fill="#3d8b7a" font-size="7" opacity="0.6">岭南</text>
+
+  <!-- Era overlay -->
+  <g id="mapOverlay"></g>
+</svg>
+</div>
+<div class="map-slider"><input type="range" min="0" max="11" value="0" id="mapSlider"></div>
+<div class="map-label" id="mapLabel">先秦 · 约前2070-前221</div>
+<div class="map-legend">
+<span><span class="dot" style="background:var(--xianqin)"></span>先秦</span>
+<span><span class="dot" style="background:var(--qinhan)"></span>秦汉</span>
+<span><span class="dot" style="background:var(--suitang)"></span>隋唐</span>
+<span><span class="dot" style="background:var(--songyuan)"></span>宋元</span>
+<span><span class="dot" style="background:var(--mingqing)"></span>明清</span>
+<span><span class="dot" style="background:var(--modern)"></span>现代</span>
+</div>
+</section>
+
+<!-- ═══ CONDITION ═══ -->
+<section class="section" id="condition">
+<div class="section-num">卷四</div>
+<h2>现代生活不是常态，是统计异常</h2>
+<h3>现代生活不是常态，是统计异常。绝大多数活过的人，从未拥有过我们今天视为理所当然的东西。</h3>
+
+<div class="condition-grid">
+<div class="cond-card"><div class="icon">💧</div><div class="label">清洁饮水</div><div class="value">&lt;5%</div><div class="note">1900年前出生的人</div></div>
+<div class="cond-card"><div class="icon">💡</div><div class="label">电力</div><div class="value">&lt;3%</div><div class="note">1900年前出生的人</div></div>
+<div class="cond-card"><div class="icon">📖</div><div class="label">识字率</div><div class="value">&lt;15%</div><div class="note">历代平均水平</div></div>
+<div class="cond-card"><div class="icon">🩺</div><div class="label">活过15岁</div><div class="value">~50%</div><div class="note">历代平均水平</div></div>
+</div>
+</section>
+
+<!-- ═══ COMFORT ═══ -->
+<section class="section" id="comfort">
+<div class="section-num">卷五</div>
+<h2>你习以为常的，是奢侈</h2>
+<h3>清洁的水、稳定的电、识字的能力、活过童年的概率。你习以为常的，是奢侈。</h3>
+</section>
+
+<!-- ═══ ROLES ═══ -->
+<section class="section" id="roles">
+<div class="section-num">卷六</div>
+<h2>概率最大的人生：无名农民</h2>
+<h3>概率最大的人生：无名农民。没名字，没头衔，史书里一行都没留下——却占掉了整个抽奖池里最大的几块。</h3>
+<div class="condition-grid">
+<div class="cond-card"><div class="icon">🌾</div><div class="label">农民</div><div class="value">~85%</div><div class="note">历代主要人口</div></div>
+<div class="cond-card"><div class="icon">⚒️</div><div class="label">工匠/商人</div><div class="value">~8%</div><div class="note">手工业与贸易</div></div>
+<div class="cond-card"><div class="icon">📜</div><div class="label">士人/官员</div><div class="value">~3%</div><div class="note">读书识字</div></div>
+<div class="cond-card"><div class="icon">⚔️</div><div class="label">军户/奴婢</div><div class="value">~4%</div><div class="note">被征召或买卖</div></div>
+</div>
+</section>
+
+<!-- ═══ DRAW ═══ -->
+<section class="section draw-section" id="draw">
+<div class="section-num">卷七</div>
+<h2>抽一条命</h2>
+<h3 style="text-align:center">按真实的概率分布。点下去，看看你是谁。</h3>
+<button class="draw-btn" onclick="drawLife()">抽 一 条 命</button>
+<p class="draw-counter">已抽 <span id="drawCount">0</span> 次</p>
+</section>
+
+<!-- ═══ METHOD ═══ -->
+<section class="section" id="method">
+<div class="section-num">卷八</div>
+<h2>方法与数据</h2>
+<div class="method-note">
+<p>人口数据基于：<br>
+· 麦迪逊项目数据库（Maddison Project）中国历代人口估算<br>
+· 联合国人口展望（UN Population Prospects）现代数据<br>
+· HYDE 3.2 历史人口空间分布</p>
+<p>计算方法：各时代出生总数 × 该时代中国占全球人口比例，逐代累加。不确定性随时代追溯而增大，先秦及更早的数据误差范围较大。</p>
+<p>这是一个思想实验，而非精确历史重建。但它指向同一个朴素的事实：<br><b style="color:var(--gold)">你此刻随手就有的一切，是大多数活过的人，做梦都够不着的配置。</b></p>
+</div>
+</section>
+
+<footer>
+<span>ARYA × 碧城</span> · 中国历史无知之幕 · 2026<br>
+基于罗尔斯「无知之幕」思想实验 · 数据开源
+</footer>
+
+<!-- ═══ RESULT OVERLAY ═══ -->
+<div class="result-overlay" id="resultOverlay">
+<div class="result-card" id="resultCard"></div>
+</div>
+
+<script>
+// ═══ SCROLL PROGRESS ═══
+window.addEventListener('scroll',()=>{
+  const h=document.documentElement.scrollHeight-window.innerHeight;
+  document.getElementById('progress').style.width=(window.scrollY/h*100)+'%';
+});
+
+// ═══ NAV ═══
+document.querySelectorAll('nav a').forEach(a=>a.addEventListener('click',e=>{
+  e.preventDefault();document.querySelector(e.target.getAttribute('href')).scrollIntoView({behavior:'smooth'});
+}));
+
+// ═══ ERA DATA ═══
+const eras=[
+  {id:'xianqin',name:'先秦',years:'前2070-前221',pct:15,color:'#8b7355',desc:'夏商周三代，华夏文明的黎明。井田、分封、青铜、诗经。'},
+  {id:'qinhan',name:'秦汉',years:'前221-220',pct:15,color:'#b8942e',desc:'大一统的开端。书同文、车同轨、丝绸之路初通。'},
+  {id:'weijin',name:'魏晋南北朝',years:'220-589',pct:10,color:'#7a6a5a',desc:'乱世三百年。衣冠南渡、五胡乱华、佛教东传。'},
+  {id:'suitang',name:'隋唐',years:'581-907',pct:15,color:'#c4482e',desc:'盛世巅峰。长安是世界之都，诗歌与胡旋舞。'},
+  {id:'songyuan',name:'宋元',years:'960-1368',pct:18,color:'#5a8a5a',desc:'商品经济腾飞。交子、市舶司、最早的工业革命萌芽。'},
+  {id:'ming',name:'明',years:'1368-1644',pct:12,color:'#3a6b7a',desc:'汉族最后的王朝。郑和下西洋、江南市镇经济。'},
+  {id:'qing',name:'清',years:'1644-1912',pct:8,color:'#6b4a3a',desc:'从康乾盛世到列强入侵。人口爆炸、王朝终结。'},
+  {id:'modern',name:'近现代',years:'1912-今',pct:7,color:'#3d8b7a',desc:'百年变革。从农业国到数字时代。你，就在这里。'},
+];
+
+// ═══ ERA TOGGLE + GRID ═══
+const toggleRow=document.getElementById('eraToggle'),grid=document.getElementById('figureGrid');
+
+// All
+let activeEra='all';
+function setEra(era){
+  activeEra=era;
+  document.querySelectorAll('.toggle-btn').forEach(b=>b.classList.remove('active'));
+  if(era==='all')toggleRow.querySelector('[data-era="all"]').classList.add('active');
+  else toggleRow.querySelector(`[data-era="${era}"]`).classList.add('active');
+  renderGrid();
+}
+
+toggleRow.innerHTML='<button class="toggle-btn active" data-era="all" onclick="setEra(\'all\')">全部</button>';
+eras.forEach(e=>{
+  toggleRow.innerHTML+=`<button class="toggle-btn" data-era="${e.id}" onclick="setEra('${e.id}')" style="border-color:${e.color}33">${e.name}</button>`;
+});
+
+// Build 100-figure grid
+const eraColorMap={};
+eras.forEach(e=>{eraColorMap[e.id]=e.color});
+
+// Distribution of 100 figures across eras
+const eraDist=[];
+eras.forEach(e=>{for(let i=0;i<e.pct;i++)eraDist.push(e.id)});
+
+function renderGrid(){
+  grid.innerHTML='';
+  for(let i=0;i<100;i++){
+    const dot=document.createElement('div');
+    dot.className='figure-dot';
+    dot.dataset.index=i;
+    dot.dataset.era=eraDist[i];
+    if(activeEra==='all'||activeEra===eraDist[i]){
+      dot.style.background=eraColorMap[eraDist[i]]+'44';
+    }else{
+      dot.style.background='rgba(255,255,255,.02)';
+    }
+    grid.appendChild(dot);
+  }
+}
+renderGrid();
+
+// ═══ TEN LIVES STRIP ═══
+const topLives=[
+  {era:'先秦',desc:'中原河谷的农民。不识字。极端贫困。',pct:'~15%',color:'#8b7355'},
+  {era:'秦汉',desc:'关中或黄河下游的农民。徭役繁重。',pct:'~13%',color:'#b8942e'},
+  {era:'宋元',desc:'江南或中原的佃农。不识字。纳粮缴税。',pct:'~12%',color:'#5a8a5a'},
+  {era:'魏晋',desc:'战乱流民。无固定居所。朝不保夕。',pct:'~10%',color:'#7a6a5a'},
+  {era:'隋唐',desc:'均田制下的自耕农或府兵。',pct:'~10%',color:'#c4482e'},
+  {era:'明清',desc:'自耕农或雇农。人口压力大。',pct:'~9%',color:'#3a6b7a'},
+  {era:'先秦',desc:'井田制下的庶人。战争频繁。',pct:'~8%',color:'#8b7355'},
+  {era:'宋元',desc:'城市小手工业者。勉强糊口。',pct:'~6%',color:'#5a8a5a'},
+  {era:'明清',desc:'南方佃农。经济作物（棉花/桑蚕）。',pct:'~5%',color:'#3a6b7a'},
+  {era:'近现代',desc:'近代城市工人或农民。经历战争与变革。',pct:'~4%',color:'#3d8b7a'},
+];
+
+const strip=document.getElementById('livesStrip');
+topLives.forEach((l,i)=>{
+  const row=document.createElement('div');
+  row.className='life-row';
+  row.innerHTML=`
+    <div class="life-bar" style="width:${l.pct==='~15%'?100:l.pct==='~13%'?87:l.pct==='~12%'?80:l.pct==='~10%'?67:l.pct==='~9%'?60:l.pct==='~8%'?53:l.pct==='~6%'?40:l.pct==='~5%'?33:27}%;background:${l.color}"></div>
+    <div class="life-pct">${l.pct}</div>
+    <div class="life-desc">${l.desc}</div>
+    <div class="life-era-tag" style="color:${l.color}">${l.era}</div>
+  `;
+  strip.appendChild(row);
+});
+
+// ═══ MAP ═══
+const mapData=[
+  {era:'先秦',cx:550,cy:220,r:60,color:'#8b7355'},
+  {era:'秦汉',cx:520,cy:230,r:70,color:'#b8942e'},
+  {era:'魏晋',cx:560,cy:260,r:65,color:'#7a6a5a'},
+  {era:'隋唐',cx:480,cy:200,r:80,color:'#c4482e'},
+  {era:'宋元',cx:500,cy:270,r:90,color:'#5a8a5a'},
+  {era:'明',cx:510,cy:280,r:75,color:'#3a6b7a'},
+  {era:'清',cx:490,cy:240,r:85,color:'#6b4a3a'},
+  {era:'近现代',cx:500,cy:250,r:60,color:'#3d8b7a'},
+];
+
+const svg=document.getElementById('chinaMap');
+// Simplified China outline
+svg.innerHTML=`
+<rect width="800" height="400" fill="none"/>
+<!-- China rough outline -->
+<path d="M200,80 L600,70 L700,120 L720,200 L680,320 L550,350 L350,340 L200,300 L120,220 L140,130 Z" fill="none" stroke="rgba(255,255,255,.06)" stroke-width="1"/>
+<!-- Yellow River -->
+<path d="M250,170 Q400,150 550,180" fill="none" stroke="rgba(255,255,255,.04)" stroke-width="1.5"/>
+<!-- Yangtze River -->  
+<path d="M200,250 Q400,230 650,260" fill="none" stroke="rgba(255,255,255,.04)" stroke-width="1.5"/>
+<!-- Population centers -->
+<circle cx="500" cy="200" r="5" fill="rgba(255,255,255,.08)"/>
+<circle cx="480" cy="270" r="4" fill="rgba(255,255,255,.06)"/>
+<circle cx="550" cy="240" r="3" fill="rgba(255,255,255,.05)"/>
+<g id="mapOverlay"></g>
+`;
+
+const slider=document.getElementById('mapSlider'),mapLabel=document.getElementById('mapLabel');
+function updateMap(idx){
+  const d=mapData[idx%mapData.length];
+  const era=eras[idx%eras.length];
+  mapLabel.textContent=era.name+' · '+era.years;
+  const overlay=document.getElementById('mapOverlay');
+  overlay.innerHTML=`
+    <circle cx="${d.cx}" cy="${d.cy}" r="${d.r}" fill="${d.color}22" stroke="${d.color}44" stroke-width="1">
+      <animate attributeName="r" from="${d.r-10}" to="${d.r+10}" dur="2s" repeatCount="indefinite" direction="alternate"/>
+    </circle>
+    <text x="${d.cx}" y="${d.cy}" text-anchor="middle" fill="${d.color}88" font-size="10" letter-spacing=".1em">${era.name}</text>
+  `;
+}
+slider.addEventListener('input',()=>updateMap(parseInt(slider.value)));
+updateMap(0);
+
+// ═══ DRAW LIFE ═══
+const lives=[
+  {era:'先秦',dynasty:'夏商周',year:'约前1600-前256年',gender:'女',cls:'农民',region:'中原河谷',literate:'不识字',age:'约14岁',color:'#8b7355',tags:['极端贫困','无自来水','无电力','战乱频仍'],judgment:'你在粟米田里弯了一辈子腰。没出过村，没留过名。活着——就是你对历史唯一的交代。'},
+  {era:'先秦',dynasty:'商',year:'约前1300年',gender:'女',cls:'奴隶',region:'殷墟',literate:'不识字',age:'约12岁',color:'#8b7355',tags:['殉葬','甲骨文时代','青铜文明'],judgment:'你是埋在殷墟里的无名者。不知道那些刻在龟甲上的字，三千年后还有人读。'},
+  {era:'先秦',dynasty:'春秋',year:'约前500年',gender:'男',cls:'士人',region:'齐鲁之地',literate:'识字',age:'约45岁',color:'#8b7355',tags:['百家争鸣','竹简为伴','游学'],judgment:'你读过几卷竹简，游过三个国家。没能留下名字，但你知道——这个时代有人在认真思考什么是"仁"。'},
+  {era:'秦汉',dynasty:'秦',year:'约前210年',gender:'男',cls:'刑徒',region:'骊山',literate:'不识字',age:'约25岁',color:'#b8942e',tags:['修皇陵','严刑峻法','短命王朝'],judgment:'你在骊山下凿石头。不知道自己在修谁的陵墓。只知道今天的饭又比昨天少了。'},
+  {era:'秦汉',dynasty:'西汉',year:'约前100年',gender:'女',cls:'织女',region:'长安',literate:'不识字',age:'约22岁',color:'#b8942e',tags:['丝绸之路','文景之治','丝绸'],judgment:'你织了一辈子丝绸，不知道它们沿那条路去了大秦。你的一匹绢，换了西域的一匹马。'},
+  {era:'魏晋',dynasty:'西晋',year:'约300年',gender:'女',cls:'流民',region:'中原→南方',literate:'不识字',age:'约15岁',color:'#7a6a5a',tags:['八王之乱','五胡乱华','衣冠南渡'],judgment:'你是逃难路上的一双脚。往南走，往南走。中原在身后烧成了灰。不知道哪里才是尽头。'},
+  {era:'隋唐',dynasty:'唐',year:'约730年',gender:'女',cls:'贵族侍女',region:'长安',literate:'识字',age:'约28岁',color:'#c4482e',tags:['开元盛世','李白醉酒','胡人琵琶'],judgment:'你在长安深宅里侍奉一位郡主。见过李白，听过胡人琵琶。大唐的繁华——你是窗子里的一双眼睛。'},
+  {era:'隋唐',dynasty:'唐末',year:'约880年',gender:'男',cls:'农民',region:'河北',literate:'不识字',age:'约19岁',color:'#c4482e',tags:['黄巢起义','藩镇割据','流离'],judgment:'黄巢的兵来了。你放下锄头拿起刀。不知道为什么打，只知道不跑就会死。'},
+  {era:'宋元',dynasty:'北宋',year:'约1080年',gender:'男',cls:'商人',region:'汴京',literate:'识字',age:'约42岁',color:'#5a8a5a',tags:['交子','清明上河图','勾栏瓦舍'],judgment:'你在汴河边开一间小铺，见过交子，听过南戏。不知道金人的马蹄已经过了黄河。'},
+  {era:'宋元',dynasty:'南宋',year:'约1200年',gender:'女',cls:'织户',region:'临安',literate:'不识字',age:'约26岁',color:'#5a8a5a',tags:['海上丝路','棉纺','理学'],judgment:'你在临安织坊里，手上全是茧。丝绸从这里出海，去了你从来没听过的地方。'},
+  {era:'明清',dynasty:'明',year:'约1550年',gender:'男',cls:'书生',region:'苏州',literate:'识字',age:'约33岁',color:'#3a6b7a',tags:['科举屡败','江南才子','市井小说'],judgment:'你考了一辈子秀才，没中举。在苏州茶馆听了半辈子评话。不知道大航海时代早已开启。'},
+  {era:'明清',dynasty:'明末',year:'约1640年',gender:'女',cls:'农民',region:'陕西',literate:'不识字',age:'约13岁',color:'#3a6b7a',tags:['小冰期','大饥荒','农民起义'],judgment:'你是饿死的。崇祯年间，陕西大旱。你走的那天——有人在山那边举起了旗。'},
+  {era:'近现代',dynasty:'清末',year:'约1890年',gender:'女',cls:'童养媳',region:'广东',literate:'不识字',age:'约16岁',color:'#6b4a3a',tags:['缠足','列强入侵','王朝末年'],judgment:'你的脚从五岁就被裹住。不知道外面有火轮船和洋枪。不知道这个王朝——只剩下二十年了。'},
+  {era:'近现代',dynasty:'民国',year:'约1930年',gender:'男',cls:'工人',region:'上海',literate:'识字',age:'约35岁',color:'#3d8b7a',tags:['十里洋场','左翼文学','战争前夕'],judgment:'你在上海纱厂里，手指被轧断两根。读过几本鲁迅。不知道更大的战争还在后面。'},
+  {era:'近现代',dynasty:'当代',year:'约1960年',gender:'女',cls:'农民',region:'河南',literate:'识字',age:'约50岁',color:'#3d8b7a',tags:['艰难岁月','坚韧','活着'],judgment:'你经历了这个新生国家最艰难的年月。吃过树皮，饿过肚子。但你活下来了——看着孩子们上了学。'},
+  {era:'近现代',dynasty:'当代',year:'约1990年',gender:'男',cls:'打工者',region:'深圳',literate:'识字',age:'约45岁',color:'#3d8b7a',tags:['改革开放','南下','流水线'],judgment:'你是南下的第一代打工人。从湖南到深圳，从农田到流水线。不知道你的孩子会在城里买上房子。'},
+  {era:'此刻',dynasty:'当代',year:'2026',gender:'你',cls:'此刻在读这段话的人',region:'屏幕前',literate:'识字',age:'大概率80+',color:'#c4a35a',tags:['清洁饮水','电力','互联网','现代医疗'],judgment:'读到这里的你——有干净的水，稳定的电，识字的自由，活过80岁的概率超过一半。你是370亿人里，中了头奖的那一个。此时此刻，好好地。'},
+];
+
+let drawCnt=0;
+function drawLife(){
+  const weights=lives.map((_,i)=>{
+    const e=lives[i].era;
+    if(e.includes('先秦'))return 15;if(e.includes('秦汉'))return 15;
+    if(e.includes('魏晋'))return 10;if(e.includes('隋唐'))return 12;
+    if(e.includes('宋元'))return 18;if(e.includes('明清'))return 14;
+    if(e.includes('近现代'))return 12;return 5;
+  });
+  const total=weights.reduce((a,b)=>a+b);let r=Math.random()*total,idx=0;
+  for(let i=0;i<weights.length;i++){r-=weights[i];if(r<=0){idx=i;break}}
+  
+  const l=lives[idx];
+  drawCnt++;document.getElementById('drawCount').textContent=drawCnt;
+  
+  // Highlight a figure
+  document.querySelectorAll('.figure-dot.active').forEach(d=>d.classList.remove('active'));
+  const fig=document.querySelector(`.figure-dot[data-index="${Math.floor(Math.random()*93)}"]`);
+  if(fig)fig.classList.add('active');
+  
+  const card=document.getElementById('resultCard');
+  card.innerHTML=`
+    <div class="era-badge">${l.era}</div>
+    <div class="dynasty-name" style="color:${l.color}">${l.dynasty}</div>
+    <div class="year-tag">${l.year}</div>
+    <div class="identity-line">${l.gender}性 · ${l.cls} · ${l.region}<br>${l.literate} · 卒年 ${l.age}</div>
+    <div class="tag-row">${l.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+    <div class="sep"></div>
+    <div class="judgment">${l.judgment}</div>
+    <div class="result-actions">
+      <button onclick="drawLife()">再抽一次</button>
+      <button onclick="copyResult()">复制结果</button>
+      <button onclick="closeResult()">关闭</button>
+    </div>
+  `;
+  document.getElementById('resultOverlay').classList.add('show');
+}
+
+function closeResult(){document.getElementById('resultOverlay').classList.remove('show')}
+function copyResult(){
+  const text=document.getElementById('resultCard').innerText;
+  navigator.clipboard.writeText('【我在中国历史里投胎】\n'+text+'\n\n你也来抽一条命 #历史无知之幕 #中国历史');
+  alert('已复制！分享到小红书吧~');
+}
+
+// Initial draw
+setTimeout(drawLife,1500);
+
+// ═══ NAV ACTIVE SECTION ═══
+const sections=document.querySelectorAll('.section[id]');
+window.addEventListener('scroll',()=>{
+  let current='';
+  sections.forEach(s=>{if(window.scrollY>=s.offsetTop-200)current=s.id});
+  document.querySelectorAll('nav a').forEach(a=>{
+    a.classList.toggle('active',a.getAttribute('href')==='#'+current);
+  });
+});
+</script>
+</body>
+</html>
