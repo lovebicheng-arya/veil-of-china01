@@ -332,28 +332,102 @@ document.getElementById('eraSlider').addEventListener('input',function(){updateT
 
 // ═══ DRAW ═══
 const lives=[
-  {era:'先秦',dynasty:'夏商周',year:'约前1600-前256',gender:'女',cls:'农民',region:'中原河谷',literate:'不识字',age:'约14岁',color:'#8b6914',tags:['极端贫困','无自来水','无电力'],judgment:'你在粟米田里弯了一辈子腰。没出过村，没留过名。活着——就是你对历史唯一的交代。'},
+  // ── 先秦 15% ──
+  {era:'先秦',dynasty:'夏商周',year:'约前1600',gender:'女',cls:'农民',region:'中原河谷',literate:'不识字',age:'约14岁',color:'#8b6914',tags:['极端贫困','无自来水','无电力'],judgment:'粟米田里弯了一辈子腰。没出过村，没留过名。活着——就是你对历史唯一的交代。'},
   {era:'先秦',dynasty:'商',year:'约前1300',gender:'女',cls:'奴隶',region:'殷墟',literate:'不识字',age:'约12岁',color:'#8b6914',tags:['殉葬','甲骨文','青铜'],judgment:'埋在殷墟的无名者。不知道那些龟甲上的字，三千年后还有人读。'},
-  {era:'先秦',dynasty:'春秋',year:'约前500',gender:'男',cls:'士人',region:'齐鲁',literate:'识字',age:'约45岁',color:'#8b6914',tags:['百家争鸣','竹简','游学'],judgment:'你读过几卷竹简，游过三个国家。没能留下名字，但你知道——这个时代有人在认真思考什么是"仁"。'},
-  {era:'秦汉',dynasty:'秦',year:'约前210',gender:'男',cls:'刑徒',region:'骊山',literate:'不识字',age:'约25岁',color:'#b8860b',tags:['修皇陵','严刑峻法'],judgment:'你在骊山下凿石头。不知道修谁的陵墓。只知道今天的饭又比昨天少了。'},
-  {era:'秦汉',dynasty:'西汉',year:'约前100',gender:'女',cls:'织女',region:'长安',literate:'不识字',age:'约22岁',color:'#b8860b',tags:['丝绸之路','丝绸'],judgment:'你织了一辈子丝绸，不知道它们沿那条路去了大秦。一匹绢，换一匹马。'},
-  {era:'魏晋',dynasty:'西晋',year:'约300',gender:'女',cls:'流民',region:'中原→南方',literate:'不识字',age:'约15岁',color:'#9b7653',tags:['八王之乱','衣冠南渡'],judgment:'逃难路上的一双脚。往南走，往南走。中原在身后烧成了灰。'},
-  {era:'隋唐',dynasty:'唐',year:'约730',gender:'女',cls:'侍女',region:'长安',literate:'识字',age:'约28岁',color:'#c0392b',tags:['开元盛世','李白','胡人琵琶'],judgment:'你在长安深宅里侍奉郡主。见过李白，听过胡人琵琶。大唐的繁华——你是窗子里的一双眼睛。'},
-  {era:'隋唐',dynasty:'唐末',year:'约880',gender:'男',cls:'农民',region:'河北',literate:'不识字',age:'约19岁',color:'#c0392b',tags:['黄巢起义','流离'],judgment:'黄巢的兵来了。放下锄头拿起刀。不知道为什么打，只知道不跑就会死。'},
-  {era:'宋元',dynasty:'北宋',year:'约1080',gender:'男',cls:'商人',region:'汴京',literate:'识字',age:'约42岁',color:'#2d7d46',tags:['交子','清明上河图'],judgment:'你在汴河边开一间小铺，见过交子，听过南戏。不知道金人的马蹄已经过了黄河。'},
-  {era:'宋元',dynasty:'南宋',year:'约1200',gender:'女',cls:'织户',region:'临安',literate:'不识字',age:'约26岁',color:'#2d7d46',tags:['海上丝路','棉纺'],judgment:'你在临安织坊里，手上全是茧。丝绸从这里出海，去了你从没听过的地方。'},
-  {era:'明清',dynasty:'明',year:'约1550',gender:'男',cls:'书生',region:'苏州',literate:'识字',age:'约33岁',color:'#1a5276',tags:['科举屡败','江南'],judgment:'考了一辈子秀才，没中举。在苏州茶馆听了半辈子评话。不知道大航海时代早已开启。'},
-  {era:'明清',dynasty:'明末',year:'约1640',gender:'女',cls:'农民',region:'陕西',literate:'不识字',age:'约13岁',color:'#1a5276',tags:['小冰期','大饥荒'],judgment:'你是饿死的。崇祯年间，陕西大旱。你走的那天——有人在山那边举起了旗。'},
-  {era:'近现代',dynasty:'清末',year:'约1890',gender:'女',cls:'童养媳',region:'广东',literate:'不识字',age:'约16岁',color:'#6b3a2e',tags:['缠足','列强入侵'],judgment:'你的脚从五岁就被裹住。不知道外面有火轮船和洋枪。不知道这个王朝只剩二十年了。'},
-  {era:'近现代',dynasty:'民国',year:'约1930',gender:'男',cls:'工人',region:'上海',literate:'识字',age:'约35岁',color:'#1a6b5a',tags:['十里洋场','左翼'],judgment:'在上海纱厂里，手指被轧断两根。读过几本鲁迅。不知道更大的战争还在后面。'},
-  {era:'近现代',dynasty:'当代',year:'约1960',gender:'女',cls:'农民',region:'河南',literate:'识字',age:'约50岁',color:'#1a6b5a',tags:['艰难岁月','坚韧'],judgment:'经历了这个国家最艰难的年月。吃过树皮，饿过肚子。但你活下来了——看着孩子们上了学。'},
-  {era:'近现代',dynasty:'当代',year:'约1990',gender:'男',cls:'打工者',region:'深圳',literate:'识字',age:'约45岁',color:'#1a6b5a',tags:['改革开放','流水线'],judgment:'南下的第一代打工人。从湖南到深圳，从农田到流水线。不知道你的孩子会在城里买上房子。'},
+  {era:'先秦',dynasty:'商',year:'约前1200',gender:'男',cls:'贞人',region:'殷墟',literate:'识字',age:'约40岁',color:'#8b6914',tags:['甲骨占卜','祭司','通神者'],judgment:'你在龟甲上刻了一辈子裂纹。王问天意，你替天回答。不知道三千二百年后，有人把你的刻痕叫做"文字"。'},
+  {era:'先秦',dynasty:'周',year:'约前800',gender:'男',cls:'农民',region:'关中平原',literate:'不识字',age:'约18岁',color:'#8b6914',tags:['井田制','徭役','诗经时代'],judgment:'《诗经》里那些"无衣""无食"的普通人。诗经唱的不是你——但你养活了唱诗经的人。'},
+  {era:'先秦',dynasty:'春秋',year:'约前500',gender:'男',cls:'士人',region:'齐鲁',literate:'识字',age:'约45岁',color:'#8b6914',tags:['百家争鸣','竹简','游学'],judgment:'读过几卷竹简，游过三个国家。没能留下名字——但你知道这个时代有人在认真思考什么是"仁"。'},
+  {era:'先秦',dynasty:'春秋',year:'约前480',gender:'男',cls:'工匠',region:'吴越',literate:'不识字',age:'约35岁',color:'#8b6914',tags:['青铜剑','铸剑师','干将莫邪'],judgment:'你是吴越之地的一名铸剑师。一辈子打了三百把剑，最好的那把献给了王。不知道你的手艺，后来被叫做"越剑天下第一"。'},
+  {era:'先秦',dynasty:'战国',year:'约前260',gender:'男',cls:'军卒',region:'长平',literate:'不识字',age:'约20岁',color:'#8b6914',tags:['战死','长平之战','秦的统一'],judgment:'死在长平。四十万人一起。历史只记了白起和赵括——你是四十万分之一。'},
+  // ── 秦汉 15% ──
+  {era:'秦汉',dynasty:'秦',year:'约前210',gender:'男',cls:'刑徒',region:'骊山',literate:'不识字',age:'约25岁',color:'#b8860b',tags:['修皇陵','严刑峻法','短命王朝'],judgment:'在骊山下凿石头。不知道修谁的陵墓。只知道今天的饭又比昨天少了。'},
+  {era:'秦汉',dynasty:'西汉',year:'约前100',gender:'女',cls:'织女',region:'长安',literate:'不识字',age:'约22岁',color:'#b8860b',tags:['丝绸之路','文景之治','丝绸'],judgment:'织了一辈子丝绸，不知道它们沿那条路去了大秦。一匹绢，换一匹马。'},
+  {era:'秦汉',dynasty:'西汉',year:'约前130',gender:'男',cls:'边塞戍卒',region:'河西走廊',literate:'不识字',age:'约28岁',color:'#b8860b',tags:['长城','烽燧','汉匈战争'],judgment:'在河西走廊守了一辈子烽火台。没见过匈奴人，但每晚都盯着北方。不知道身后有条路，后来叫丝绸之路。'},
+  {era:'秦汉',dynasty:'东汉',year:'约150',gender:'男',cls:'小吏',region:'洛阳',literate:'识字',age:'约38岁',color:'#b8860b',tags:['太学','宦官','造纸术'],judgment:'在洛阳城西做小吏。见过蔡侯纸，听过太学生议论朝政。不知道黄巾军已经在路上了。'},
+  {era:'秦汉',dynasty:'东汉',year:'约190',gender:'女',cls:'医者',region:'南阳',literate:'识字',age:'约50岁',color:'#b8860b',tags:['伤寒','张仲景时代','草药'],judgment:'你是南阳郡里一名走方女医。治好了很多发烧的人，却治不好这个正在发烧的天下。'},
+  // ── 魏晋 10% ──
+  {era:'魏晋',dynasty:'西晋',year:'约300',gender:'女',cls:'流民',region:'中原→南方',literate:'不识字',age:'约15岁',color:'#9b7653',tags:['八王之乱','五胡乱华','衣冠南渡'],judgment:'逃难路上的一双脚。往南走，往南走。中原在身后烧成了灰。不知道哪里才是尽头。'},
+  {era:'魏晋',dynasty:'东晋',year:'约350',gender:'男',cls:'士人',region:'建康',literate:'识字',age:'约55岁',color:'#9b7653',tags:['清谈','兰亭','王羲之'],judgment:'在建康城参加过一次雅集。见过一个人喝了酒在一张纸上写字。不知道那一张纸，后来被临摹了上千年。'},
+  {era:'南北朝',dynasty:'北魏',year:'约480',gender:'男',cls:'僧侣',region:'洛阳',literate:'识字',age:'约50岁',color:'#9b7653',tags:['佛教东传','龙门石窟','云冈'],judgment:'在龙门山下凿了一辈子佛。不知道一千五百年后，还有人站在那些石头面前流泪。'},
+  {era:'南北朝',dynasty:'南朝',year:'约520',gender:'女',cls:'织锦女',region:'成都',literate:'不识字',age:'约23岁',color:'#9b7653',tags:['蜀锦','南朝四百八十寺'],judgment:'你是成都一名蜀锦织女。图案里有云、有鸟、有莲花。不知道你织的锦，被商人运到了波斯。'},
+  // ── 隋唐 15% ──
+  {era:'隋唐',dynasty:'唐',year:'约730',gender:'女',cls:'侍女',region:'长安',literate:'识字',age:'约28岁',color:'#c0392b',tags:['开元盛世','李白','胡人琵琶'],judgment:'在长安深宅侍奉一位郡主。见过李白醉酒，听过胡人弹琵琶。大唐的繁华——你是窗子里的一双眼睛。'},
+  {era:'隋唐',dynasty:'唐',year:'约750',gender:'男',cls:'商人',region:'广州',literate:'识字',age:'约45岁',color:'#c0392b',tags:['海上丝路','市舶使','蕃坊'],judgment:'在广州港做香料生意。和波斯人、大食人喝过酒。不知道你进口的乳香，被杨贵妃用来沐浴。'},
+  {era:'隋唐',dynasty:'唐',year:'约760',gender:'男',cls:'农民',region:'河北',literate:'不识字',age:'约19岁',color:'#c0392b',tags:['安史之乱','藩镇割据'],judgment:'安禄山的兵来了。放下锄头拿起刀。不知道为什么打，只知道不跑就会死。'},
+  {era:'隋唐',dynasty:'唐末',year:'约880',gender:'女',cls:'歌伎',region:'扬州',literate:'识字',age:'约24岁',color:'#c0392b',tags:['词','花间派','繁华将尽'],judgment:'在扬州的夜色里唱了一辈子词。不知道黄巢的兵已经在路上了。但今晚的花，还是开得很好。'},
+  {era:'隋唐',dynasty:'隋',year:'约610',gender:'男',cls:'纤夫',region:'通济渠',literate:'不识字',age:'约28岁',color:'#c0392b',tags:['大运河','龙舟','徭役'],judgment:'在运河边拉了一辈子纤。龙舟过去的时候不敢抬头。不知道你拉的这条河，后来流过了一千四百年。'},
+  // ── 宋元 18% ──
+  {era:'宋元',dynasty:'北宋',year:'约1080',gender:'男',cls:'商人',region:'汴京',literate:'识字',age:'约42岁',color:'#2d7d46',tags:['交子','清明上河图','勾栏瓦舍'],judgment:'在汴河边开一间小铺，见过交子，听过南戏，吃过樊楼炙羊肉。不知道金人的马蹄已经过了黄河。'},
+  {era:'宋元',dynasty:'南宋',year:'约1200',gender:'女',cls:'织户',region:'临安',literate:'不识字',age:'约26岁',color:'#2d7d46',tags:['海上丝路','棉纺','理学'],judgment:'在临安织坊里，手上全是茧。丝绸从这里出海，去了你从没听过的地方。'},
+  {era:'宋元',dynasty:'南宋',year:'约1270',gender:'男',cls:'水手',region:'泉州',literate:'不识字',age:'约30岁',color:'#2d7d46',tags:['市舶司','远洋','蒲寿庚'],judgment:'在泉州港做水手。去过占城、爪哇、天竺。不知道你驶过的航线，后来被写进了《诸蕃志》。'},
+  {era:'宋元',dynasty:'元',year:'约1290',gender:'男',cls:'农民',region:'江南',literate:'不识字',age:'约17岁',color:'#2d7d46',tags:['四等人制','杂剧','南人'],judgment:'江南田里的"南人"。不知道大都的蒙古贵族吃什么。只知道今年的税，又重了。'},
+  {era:'宋元',dynasty:'元',year:'约1330',gender:'女',cls:'瓷工',region:'景德镇',literate:'不识字',age:'约25岁',color:'#2d7d46',tags:['青花瓷','浮梁瓷局','窑火'],judgment:'在景德镇画了一辈子青花。钴料来自波斯，图案画给全世界。不知道你画的瓷瓶，后来沉在了南海的沉船里。'},
+  // ── 明清 14% ──
+  {era:'明清',dynasty:'明',year:'约1420',gender:'男',cls:'水手',region:'太仓',literate:'不识字',age:'约35岁',color:'#1a5276',tags:['郑和下西洋','宝船','永乐'],judgment:'跟着郑和的宝船出过三次洋。见过满剌加的王、锡兰的佛、非洲的长颈鹿。不知道你死后四百年，有人还在争论宝船到底有多大。'},
+  {era:'明清',dynasty:'明',year:'约1550',gender:'男',cls:'书生',region:'苏州',literate:'识字',age:'约33岁',color:'#1a5276',tags:['科举屡败','江南才子','市井小说'],judgment:'考了一辈子秀才，没中举。在苏州茶馆听了半辈子评话。不知道大航海时代早已开启。'},
+  {era:'明清',dynasty:'明末',year:'约1640',gender:'女',cls:'农民',region:'陕西',literate:'不识字',age:'约13岁',color:'#1a5276',tags:['小冰期','大饥荒','农民起义'],judgment:'你是饿死的。崇祯年间，陕西大旱。你走的那天——有人在山那边举起了旗。'},
+  {era:'明清',dynasty:'清',year:'约1750',gender:'男',cls:'农民',region:'四川',literate:'不识字',age:'约28岁',color:'#1a5276',tags:['康乾盛世','人口爆炸','玉米'],judgment:'盛世里多出来的那一张嘴。种着美洲来的玉米。不知道皇帝叫什么——只知道今年饿不死了。'},
+  {era:'明清',dynasty:'清',year:'约1840',gender:'男',cls:'兵勇',region:'广东',literate:'不识字',age:'约22岁',color:'#1a5276',tags:['鸦片战争','虎门','近代开端'],judgment:'在虎门炮台守了三年。见过英国人的铁甲船。不知道你打的这场仗，后来被写进了每一本历史教科书的第一页。'},
+  // ── 近现代 15% ──
+  {era:'近现代',dynasty:'清末',year:'约1890',gender:'女',cls:'童养媳',region:'广东',literate:'不识字',age:'约16岁',color:'#6b3a2e',tags:['缠足','列强入侵','王朝末年'],judgment:'你的脚从五岁就被裹住。不知道外面有火轮船和洋枪。不知道这个王朝——只剩二十年了。'},
+  {era:'近现代',dynasty:'清末',year:'约1905',gender:'男',cls:'留学生',region:'东京',literate:'识字',age:'约22岁',color:'#6b3a2e',tags:['废除科举','同盟会','留学日本'],judgment:'考不了科举了，坐船去了日本。在东京念书，在横滨遇见了一群同样愤怒的年轻人。不知道你们后来改变了中国。'},
+  {era:'近现代',dynasty:'民国',year:'约1930',gender:'男',cls:'工人',region:'上海',literate:'识字',age:'约35岁',color:'#1a6b5a',tags:['十里洋场','左翼文学'],judgment:'在上海纱厂里，手指被轧断两根。读过几本鲁迅。不知道更大的战争还在后面。'},
+  {era:'近现代',dynasty:'民国',year:'约1938',gender:'女',cls:'教师',region:'昆明',literate:'识字',age:'约25岁',color:'#1a6b5a',tags:['西南联大','流亡','弦歌不辍'],judgment:'跟着学校从北平走到长沙，又从长沙走到了昆明。在铁皮屋顶下教了一辈子书。不知道你教的学生里，后来出了两个诺贝尔奖。'},
+  {era:'近现代',dynasty:'当代',year:'约1960',gender:'女',cls:'农民',region:'河南',literate:'识字',age:'约50岁',color:'#1a6b5a',tags:['艰难岁月','坚韧','活着'],judgment:'经历了这个国家最艰难的年月。吃过树皮，饿过肚子。但你活下来了——看着孩子们上了学。'},
+  {era:'近现代',dynasty:'当代',year:'约1990',gender:'男',cls:'打工者',region:'深圳',literate:'识字',age:'约45岁',color:'#1a6b5a',tags:['改革开放','南下','流水线'],judgment:'南下的第一代打工人。从湖南到深圳，从农田到流水线。不知道你的孩子——会在城市里买上房子。'},
+  {era:'先秦',dynasty:'周',year:'约前600',gender:'男',cls:'小贩',region:'洛邑',literate:'不识字',age:'约30岁',color:'#8b6914',tags:['以物易物','贝币','列国'],judgment:'在洛邑市集上摆了一辈子摊。用粟米换布，用布换盐。不知道你手里那些贝壳——后来被叫做中国最早的货币。'},
+  {era:'秦汉',dynasty:'西汉',year:'约前80',gender:'男',cls:'驿卒',region:'河西',literate:'不识字',age:'约25岁',color:'#b8860b',tags:['驿站','传马','汉简'],judgment:'在河西走廊的驿站里喂了一辈子马。看着传令兵来了又走。不知道你递过的那些木简里，有一块后来被考古学家叫做"居延汉简"。'},
+  {era:'秦汉',dynasty:'东汉',year:'约100',gender:'男',cls:'铁匠',region:'南阳',literate:'不识字',age:'约40岁',color:'#b8860b',tags:['冶铁','农具','百炼钢'],judgment:'在南阳郡打了一辈子铁。从锄头打到刀剑。不知道你锤下的铁——后来被曹操的军队拿在手里打了官渡之战。'},
+  {era:'魏晋',dynasty:'北魏',year:'约500',gender:'男',cls:'牧羊人',region:'阴山',literate:'不识字',age:'约35岁',color:'#9b7653',tags:['游牧','鲜卑','六镇'],judgment:'在阴山脚下放了一辈子羊。鲜卑人来了，汉人走了。不知道你脚下的这片草——后来成了花木兰替父从军的出发地。'},
+  {era:'隋唐',dynasty:'唐',year:'约700',gender:'女',cls:'采桑女',region:'江南',literate:'不识字',age:'约20岁',color:'#c0392b',tags:['蚕桑','丝绸','江南'],judgment:'在江南的桑树林里采了一辈子桑叶。手指被桑葚染成了紫色。不知道你养的蚕吐出的丝——织成了波斯国王的袍子。'},
+  {era:'隋唐',dynasty:'唐',year:'约780',gender:'男',cls:'茶农',region:'湖州',literate:'不识字',age:'约45岁',color:'#c0392b',tags:['陆羽时代','紫笋茶','贡茶'],judgment:'在顾渚山下种了一辈子茶。每年春天，最好的那几斤要送到长安。不知道后来——有人把你种的茶写进了世界上第一本茶经。'},
+  {era:'宋元',dynasty:'北宋',year:'约1050',gender:'男',cls:'窑工',region:'汝州',literate:'不识字',age:'约35岁',color:'#2d7d46',tags:['汝瓷','天青色','五大名窑'],judgment:'在汝州烧了一辈子瓷。天青色需要等烟雨。你不知道你烧出的那只碗——后来在苏富比拍出了两亿。'},
+  {era:'宋元',dynasty:'南宋',year:'约1180',gender:'男',cls:'刻书匠',region:'建阳',literate:'识字',age:'约40岁',color:'#2d7d46',tags:['雕版印刷','建本','书坊'],judgment:'在建阳的书坊里刻了一辈子版。一个字一刀，一页一整天。不知道你刻的那些书——后来被读书人捧在手里，把朱熹的思想传遍了整个南方。'},
+  {era:'宋元',dynasty:'元',year:'约1310',gender:'女',cls:'绣娘',region:'苏州',literate:'不识字',age:'约28岁',color:'#2d7d46',tags:['苏绣','元大都','江南'],judgment:'在苏州的绣坊里绣了一辈子。一针一线，花鸟鱼虫。不知道你绣的那条帕子——被商人带到了波斯，被人叫做"中国画在丝绸上"。'},
+  {era:'明清',dynasty:'明',year:'约1480',gender:'男',cls:'银匠',region:'扬州',literate:'不识字',age:'约45岁',color:'#1a5276',tags:['白银','银锭','商品经济'],judgment:'在扬州城里打了一辈子银器。把银块熔了又铸，铸了又熔。不知道你经手的银子——有些是从美洲跨过太平洋来的。'},
+  {era:'明清',dynasty:'明',year:'约1580',gender:'男',cls:'船工',region:'淮安',literate:'不识字',age:'约30岁',color:'#1a5276',tags:['漕运','大运河','漕粮'],judgment:'在大运河上撑了一辈子漕船。从淮安到通州，从通州回淮安。不知道你运的那些粮食——养活了整个北京的朝廷和边关的士兵。'},
+  {era:'明清',dynasty:'清',year:'约1780',gender:'男',cls:'盐商',region:'扬州',literate:'识字',age:'约55岁',color:'#1a5276',tags:['盐业','扬州画派','徽商'],judgment:'在扬州城里做盐商。有钱，有园子，养了一群画师。不知道你资助的那些画家——后来被叫做"扬州八怪"。'},
+  {era:'明清',dynasty:'清',year:'约1820',gender:'男',cls:'师爷',region:'绍兴',literate:'识字',age:'约50岁',color:'#1a5276',tags:['幕僚','刑名','绍兴师爷'],judgment:'在衙门里做了一辈子师爷。不是官，但官离不开你。刑名、钱谷、文书——你才是衙门里真正干活的人。不知道大清国的运转，有一半靠的是你这样的无名师爷。'},
+  {era:'明清',dynasty:'清',year:'约1860',gender:'女',cls:'绣娘',region:'广州',literate:'不识字',age:'约22岁',color:'#1a5276',tags:['广绣','十三行','外销'],judgment:'在广州的绣坊里绣了一辈子。图案里有龙、有凤、有西洋的花。不知道你绣的那些披肩——后来在欧洲贵妇的肩膀上，被叫做"中国云肩"。'},
+  {era:'近现代',dynasty:'民国',year:'约1925',gender:'男',cls:'黄包车夫',region:'上海',literate:'不识字',age:'约30岁',color:'#1a6b5a',tags:['老上海','租界','人力车'],judgment:'在上海的弄堂间拉了一辈子黄包车。从法租界拉到虹口，从霞飞路拉到外滩。不知道你跑过的那些路——后来成了上海的城市记忆。'},
+  {era:'近现代',dynasty:'民国',year:'约1935',gender:'女',cls:'纺纱女工',region:'南通',literate:'不识字',age:'约20岁',color:'#1a6b5a',tags:['民族工业','大生纱厂','张謇'],judgment:'在南通的纱厂里做了一辈子工。机器是从英国来的，棉花是从苏北来的。不知道你纺的那些纱——后来织成了中国民族工业的第一匹布。'},
+  {era:'近现代',dynasty:'当代',year:'约1980',gender:'男',cls:'个体户',region:'温州',literate:'识字',age:'约40岁',color:'#1a6b5a',tags:['改革开放','温州模式','万元户'],judgment:'你是温州第一批个体户。从修鞋摊做起，后来又开了纽扣厂。不知道你这样的"个体户"——后来被写进了中国经济改革的教科书。'},
+  {era:'近现代',dynasty:'当代',year:'约2000',gender:'女',cls:'程序员',region:'北京',literate:'识字',age:'约30岁',color:'#1a6b5a',tags:['互联网','中关村','码农'],judgment:'在中关村写代码。从C++写到Java，从网页写到App。不知道你加班的那些夜晚——是中国互联网黄金时代的一部分。'},
+  // ── 文化名人 / 名臣（稀有 ~0.2-0.3% each）──
+  {era:'先秦',dynasty:'战国',year:'约前280',gender:'男',cls:'🌟 诗人',region:'楚国',literate:'识字',age:'约62岁',color:'#c4a35a',tags:['🎲 稀有掉落','屈原','离骚'],judgment:'🎲 你是屈原。举世皆浊我独清，众人皆醉我独醒。投了汨罗江之后——中国人用粽子、龙舟和一天假期，纪念了你两千三百年。'},
+  {era:'秦汉',dynasty:'西汉',year:'约前100',gender:'男',cls:'🌟 史官',region:'长安',literate:'识字',age:'约55岁',color:'#c4a35a',tags:['🎲 稀有掉落','司马迁','史记'],judgment:'🎲 你是司马迁。宫刑之后，你在牢里写完了一百三十篇。你不知道——后来两千年，每一个写中国历史的人，都站在你的肩膀上。'},
+  {era:'秦汉',dynasty:'西汉',year:'约前120',gender:'男',cls:'🌟 使节',region:'西域',literate:'识字',age:'约65岁',color:'#c4a35a',tags:['🎲 稀有掉落','张骞','凿空西域'],judgment:'🎲 你是张骞。被匈奴扣押十年，逃出来继续往西走。你走过的路——后来叫丝绸之路。'},
+  {era:'魏晋',dynasty:'东晋',year:'约400',gender:'男',cls:'🌟 诗人',region:'庐山',literate:'识字',age:'约63岁',color:'#c4a35a',tags:['🎲 稀有掉落','陶渊明','桃花源记'],judgment:'🎲 你是陶渊明。不为五斗米折腰，归去来兮。你种了一辈子豆子，写了一个没人找得到的桃花源。后来每一个想逃离的人，都在心里藏了一个桃花源。'},
+  {era:'魏晋',dynasty:'东晋',year:'约360',gender:'男',cls:'🌟 书圣',region:'会稽',literate:'识字',age:'约58岁',color:'#c4a35a',tags:['🎲 稀有掉落','王羲之','兰亭序'],judgment:'🎲 你是王羲之。醉酒之后在一张蚕茧纸上写了三百二十四个字。醒了再也写不出。那张纸——后来被临摹了上千年，真迹可能埋在了昭陵里。'},
+  {era:'隋唐',dynasty:'唐',year:'约740',gender:'男',cls:'🌟 诗人',region:'长安',literate:'识字',age:'约61岁',color:'#c4a35a',tags:['🎲 稀有掉落','李白','诗仙'],judgment:'🎲 你是李白。天子呼来不上船，自称臣是酒中仙。你写过的诗句，一千三百年后每一个中国小孩都会背。捉月而死——连死法都像一首诗。'},
+  {era:'隋唐',dynasty:'唐',year:'约760',gender:'男',cls:'🌟 诗人',region:'成都',literate:'识字',age:'约58岁',color:'#c4a35a',tags:['🎲 稀有掉落','杜甫','诗圣'],judgment:'🎲 你是杜甫。安得广厦千万间，大庇天下寒士俱欢颜。你活着的时候不出名，死了四十年后——整个中国开始叫你"诗圣"。'},
+  {era:'隋唐',dynasty:'唐',year:'约810',gender:'男',cls:'🌟 文豪',region:'长安',literate:'识字',age:'约56岁',color:'#c4a35a',tags:['🎲 稀有掉落','韩愈','古文运动'],judgment:'🎲 你是韩愈。文起八代之衰，道济天下之溺。你一个人扛起了古文运动。后来苏轼说你"匹夫而为百世师，一言而为天下法"。'},
+  {era:'宋元',dynasty:'北宋',year:'约1070',gender:'男',cls:'🌟 文豪',region:'黄州',literate:'识字',age:'约64岁',color:'#c4a35a',tags:['🎲 稀有掉落','苏轼','千古第一文人'],judgment:'🎲 你是苏轼。乌台诗案后贬到黄州，你写出了《赤壁赋》。此后一贬再贬，每贬一次，你写的诗词就好一倍。人生如逆旅，你亦是行人。'},
+  {era:'宋元',dynasty:'北宋',year:'约1040',gender:'男',cls:'🌟 名臣',region:'开封',literate:'识字',age:'约63岁',color:'#c4a35a',tags:['🎲 稀有掉落','范仲淹','岳阳楼记'],judgment:'🎲 你是范仲淹。先天下之忧而忧，后天下之乐而乐。你在西北守过边关，在朝中推过新政。那句"不以物喜不以己悲"——后来成了中国读书人的精神标杆。'},
+  {era:'宋元',dynasty:'南宋',year:'约1278',gender:'男',cls:'🌟 名臣',region:'崖山',literate:'识字',age:'约47岁',color:'#c4a35a',tags:['🎲 稀有掉落','文天祥','正气歌'],judgment:'🎲 你是文天祥。人生自古谁无死，留取丹心照汗青。元朝劝了你三年，你不降。就义那天——连刽子手都哭了。'},
+  {era:'宋元',dynasty:'南宋',year:'约1140',gender:'女',cls:'🌟 词人',region:'杭州',literate:'识字',age:'约71岁',color:'#c4a35a',tags:['🎲 稀有掉落','李清照','千古第一才女'],judgment:'🎲 你是李清照。前半生赌书泼茶，后半生国破家亡。寻寻觅觅冷冷清清——你把一个女人的一生，写成了中国文学史上最孤独的几行字。'},
+  {era:'明清',dynasty:'明',year:'约1510',gender:'男',cls:'🌟 圣人',region:'绍兴',literate:'识字',age:'约57岁',color:'#c4a35a',tags:['🎲 稀有掉落','王阳明','心学'],judgment:'🎲 你是王阳明。龙场悟道之后，你提出了知行合一。剿过匪，平过叛，最后在一条小船上离开了。你说——此心光明，亦复何言。'},
+  {era:'明清',dynasty:'明',year:'约1590',gender:'男',cls:'🌟 名臣',region:'江陵',literate:'识字',age:'约57岁',color:'#c4a35a',tags:['🎲 稀有掉落','张居正','一条鞭法'],judgment:'🎲 你是张居正。你一个人扛起了大明王朝最后的辉煌。十年首辅，考成法、一条鞭法。死后被抄家——但你给大明续了五十年命。'},
+  {era:'明清',dynasty:'清',year:'约1760',gender:'男',cls:'🌟 文豪',region:'北京',literate:'识字',age:'约48岁',color:'#c4a35a',tags:['🎲 稀有掉落','曹雪芹','红楼梦'],judgment:'🎲 你是曹雪芹。举家食粥酒常赊，十年辛苦不寻常。你写了一本书，没写完。不知道后来——那本书成了中国文学的最高峰。'},
+  {era:'明清',dynasty:'明',year:'约1610',gender:'男',cls:'🌟 旅行家',region:'江阴',literate:'识字',age:'约54岁',color:'#c4a35a',tags:['🎲 稀有掉落','徐霞客','游记'],judgment:'🎲 你是徐霞客。大丈夫当朝碧海而暮苍梧。你用一双脚走了二十一年——从浙江走到云南，从武夷走到腾冲。六十万字的游记，是你留给世界的地图。'},
+  {era:'明清',dynasty:'明',year:'约1520',gender:'男',cls:'🌟 医学家',region:'蕲春',literate:'识字',age:'约75岁',color:'#c4a35a',tags:['🎲 稀有掉落','李时珍','本草纲目'],judgment:'🎲 你是李时珍。你花了一辈子，写了一本关于每一种草药的书。五十二卷，一百九十万字。不知道四百年后——全世界的植物学家还在引用你。'},
+  {era:'明清',dynasty:'清',year:'约1840',gender:'男',cls:'🌟 名臣',region:'湖南',literate:'识字',age:'约61岁',color:'#c4a35a',tags:['🎲 稀有掉落','林则徐','虎门销烟'],judgment:'🎲 你是林则徐。苟利国家生死以，岂因祸福避趋之。你在虎门海滩上烧了两万箱鸦片。不知道你烧的那把火，点燃了之后一百年的中国。'},
+  {era:'近现代',dynasty:'民国',year:'约1920',gender:'男',cls:'🌟 作家',region:'北京',literate:'识字',age:'约55岁',color:'#c4a35a',tags:['🎲 稀有掉落','鲁迅','狂人日记'],judgment:'🎲 你是鲁迅。横眉冷对千夫指，俯首甘为孺子牛。你在铁屋子里喊了一嗓子——后来很多人都醒了。'},
+  {era:'宋元',dynasty:'北宋',year:'约1050',gender:'男',cls:'🌟 科学家',region:'杭州',literate:'识字',age:'约62岁',color:'#c4a35a',tags:['🎲 稀有掉落','沈括','梦溪笔谈'],judgment:'🎲 你是沈括。你在《梦溪笔谈》里记录了石油、指南针、活字印刷。英国科学史家李约瑟说——你是中国整部科学史上最卓越的人物。'},
+  // ── 帝王后妃（稀有掉落 ~0.2% each）──
+  {era:'秦汉',dynasty:'秦',year:'约前220',gender:'男',cls:'⚜️ 帝王',region:'咸阳宫',literate:'识字',age:'约49岁',color:'#c4a35a',tags:['🎲 稀有掉落','千古一帝','统一六国'],judgment:'🎲 你是秦始皇嬴政。书同文，车同轨，筑长城。你想要的万世——二世而亡。但"皇帝"这个词，你发明之后，在中国用了2132年。'},
+  {era:'隋唐',dynasty:'唐',year:'约690',gender:'女',cls:'⚜️ 帝王',region:'洛阳',literate:'识字',age:'约81岁',color:'#c4a35a',tags:['🎲 稀有掉落','唯一女皇','无字碑'],judgment:'🎲 你是武则天。从才人到皇帝，你走了五十年。最后立了一块无字碑——功过，留给后人去说。'},
+  {era:'隋唐',dynasty:'唐',year:'约745',gender:'女',cls:'👑 贵妃',region:'长安',literate:'识字',age:'约38岁',color:'#c4a35a',tags:['🎲 稀有掉落','杨玉环','长恨歌'],judgment:'🎲 你是杨玉环。六宫粉黛无颜色，从此君王不早朝。马嵬坡下泥土中，不见玉颜空死处。你用一死，换了一首长恨歌。'},
+  {era:'明清',dynasty:'清',year:'约1720',gender:'男',cls:'⚜️ 帝王',region:'紫禁城',literate:'识字',age:'约68岁',color:'#c4a35a',tags:['🎲 稀有掉落','康熙','千古一帝'],judgment:'🎲 你是康熙帝。擒鳌拜、平三藩、收台湾、拒沙俄。在位六十一年。中国历史上在位最久的皇帝——你见过太多，也背负了太多。'},
+  {era:'宋元',dynasty:'北宋',year:'约1100',gender:'男',cls:'⚜️ 帝王',region:'汴京',literate:'识字',age:'约53岁',color:'#c4a35a',tags:['🎲 稀有掉落','宋徽宗','瘦金体'],judgment:'🎲 你是宋徽宗赵佶。你可能是中国历史上最好的书画家——也是最糟的皇帝。瘦金体写绝了，国家也丢了。'},
+  // ── 2026 · 你 ──
   {era:'此刻',dynasty:'当代',year:'2026',gender:'',cls:'正在读这段话的你',region:'屏幕前',literate:'识字',age:'大概率80+',color:'#c4a35a',tags:['清洁饮水','电力','互联网','现代医疗'],judgment:'读到这里的你——有干净的水，稳定的电，识字的自由，活过80岁的概率超过一半。你是370亿人里，中了头奖的那一个。此时此刻，好好地。'},
 ];
 
 let drawCnt=0;
 function drawLife(){
-  const weights=lives.map((_,i)=>{const e=lives[i].era;if(e.includes('此刻'))return 0.5;if(e.includes('先秦'))return 15;if(e.includes('秦汉'))return 15;if(e.includes('魏晋'))return 10;if(e.includes('隋唐'))return 12;if(e.includes('宋元'))return 18;if(e.includes('明清'))return 14;return 15.5;});
+  const weights=lives.map((_,i)=>{const e=lives[i].era;const c=lives[i].cls;if(c&&(c.includes('⚜️')||c.includes('👑')||c.includes('🌟')))return 0.1;if(e.includes('此刻'))return 0.5;if(e.includes('先秦'))return 12;if(e.includes('秦汉'))return 12;if(e.includes('魏晋')||e.includes('南北'))return 8;if(e.includes('隋唐'))return 10;if(e.includes('宋元'))return 14;if(e.includes('明清'))return 11;return 12;});
   const total=weights.reduce((a,b)=>a+b);let r=Math.random()*total,idx=0;
   for(let i=0;i<weights.length;i++){r-=weights[i];if(r<=0){idx=i;break}}
   const l=lives[idx];drawCnt++;document.getElementById('drawCount').textContent=drawCnt;
